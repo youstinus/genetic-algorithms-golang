@@ -15,6 +15,6 @@ func createModule() {
 }
 
 func (m *Module) getRandomProfessorID() int {
-	var professorID = _professorIds[rand.Intn(9494268)%len(m.ProfessorIds)]
+	var professorID = m.ProfessorsIDs[rand.Intn(9494268)%len(m.ProfessorsIDs)]
 	return professorID
 }

@@ -20,3 +20,8 @@ func (g *Group) getModuleIDs() []int {
 
 	return g.ModuleIDs
 }
+
+func (g *Group) getGroupID() int {
+
+	return g.GroupID
+}
