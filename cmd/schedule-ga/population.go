@@ -17,7 +17,7 @@ type ByFitness []Individual
 
 func (a ByFitness) Len() int           { return len(a) }
 func (a ByFitness) Swap(i, j int)      { a[i], a[j] = a[j], a[i] }
-func (a ByFitness) Less(i, j int) bool { return a[i].Fitness < a[j].Fitness }
+func (a ByFitness) Less(i, j int) bool { return a[i].Fitness > a[j].Fitness } // for desc order
 
 // creates the initial population
 func createPopulationBySize(size int) (population Population) {
@@ -72,8 +72,10 @@ func (p *Population) GetFittest(offset int) Individual {
 		 }
 	 });
 	*/
+
 	sort.Sort(ByFitness(p.Population))
 	// Return the fittest individual
+	//fmt.Println(p.Population[0])
 	return p.Population[offset]
 }
 
@@ -90,4 +92,8 @@ func (p *Population) shuffle() {
 		p.Population[index] = p.Population[i]
 		p.Population[i] = a
 	}
+}
+
+func (p *Population) sortPopulation() {
+	sort.Sort(ByFitness(p.Population))
 }

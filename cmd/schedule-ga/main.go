@@ -19,12 +19,14 @@ func main() {
 
 	// Initialize population
 	population := ga.InitPopulation(timeTable)
-
+	//fmt.Println(population)
 	// Evaluate population
-	ga.EvalPopulation(population, timeTable)
-
+	ga.EvalPopulation(&population, timeTable)
+	/*fmt.Println(population)
+	population.sortPopulation()
+	fmt.Println(population)*/
 	// Keep track of current generation
-	var generation = 1
+	generation := 1
 
 	// Start evolution loop
 	for !ga.IsTerminationConditionMet1(generation, 1000) && !ga.IsTerminationConditionMet2(population) {
@@ -38,14 +40,15 @@ func main() {
 		population = ga.MutatePopulation(population, timeTable)
 
 		// Evaluate population
-		ga.EvalPopulation(population, timeTable)
+		ga.EvalPopulation(&population, timeTable)
 
 		// Increment the current generation
 		generation++
 	}
 
 	// Print fitness
-	timeTable.createClasses(population.GetFittest(0))
+	individ := population.GetFittest(0)
+	timeTable.createClasses(&individ)
 	fmt.Println()
 	fmt.Println("Solution found in ", generation, " generations")
 	fmt.Println("Final solution fitness: ", population.GetFittest(0).Fitness)

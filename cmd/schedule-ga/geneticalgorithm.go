@@ -34,11 +34,8 @@ func createGeneticAlgorithm(populationSize int, mutationRate float64, crossoverR
  */
 func (ga *GeneticAlgorithm) InitPopulation(timeTable TimeTable) (population Population) {
 	// Initialize population
-	population = Population{
-		Population:        make([]Individual, ga.PopulationSize),
-		PopulationFitness: 0,
-	}
-	return population
+	population = createPopulationByTimeTable(ga.PopulationSize, timeTable)
+	return
 }
 
 /**
@@ -71,7 +68,7 @@ func (ga *GeneticAlgorithm) IsTerminationConditionMet2(population Population) bo
  * @param timetable
  * @return fitness
  */
-func CalcFitness(individual Individual, timeTable TimeTable) float64 {
+func calcFitness(individual *Individual, timeTable TimeTable) float64 {
 
 	// Create new timetable object to use -- cloned from an existing timetable
 	threadTimeTable := timeTable
@@ -92,15 +89,21 @@ func CalcFitness(individual Individual, timeTable TimeTable) float64 {
  * @param population
  * @param timetable
  */
-func (ga *GeneticAlgorithm) EvalPopulation(population Population, timeTable TimeTable) {
+func (ga *GeneticAlgorithm) EvalPopulation(population *Population, timeTable TimeTable) {
 	var populationFitness float64 = 0
 
 	// Loop over population evaluating individuals and summing population
 	// fitness
-	for _, individual := range population.Population {
-		populationFitness += calcFitness(individual, timeTable)
+	// Makes a copy attention
+	/*for _, individual := range population.Population {
+		populationFitness += calcFitness(&individual, timeTable)
+	}*/
+
+	for i := range population.Population {
+		populationFitness += calcFitness(&population.Population[i], timeTable)
 	}
 
+	//fmt.Println(populationFitness, population.Population[0])
 	population.PopulationFitness = populationFitness
 }
 
@@ -123,7 +126,7 @@ func (ga *GeneticAlgorithm) SelectParent(population Population) Individual {
 	// Add random individuals to the tournament
 	population.shuffle()
 	for i := 0; i < ga.TournamentSize; i++ {
-		var tournamentIndividual = population.Population[i]
+		tournamentIndividual := population.Population[i]
 		tournament.Population[i] = tournamentIndividual
 	}
 
@@ -219,27 +222,4 @@ func (ga *GeneticAlgorithm) CrossoverPopulation(population Population) Populatio
 	}
 
 	return newPopulation
-}
-
-/**
- * Calculate individual's fitness value
- *
- * @param individual
- * @param timetable
- * @return fitness
- */
-func calcFitness(individual Individual, timeTable TimeTable) float64 {
-
-	// Create new timetable object to use -- cloned from an existing timetable
-	threadTimetable := timeTable
-
-	threadTimetable.createClasses(individual)
-
-	// Calculate fitness
-	var clashes = threadTimetable.calcClashes()
-	var fitness = 1 / (float64)(clashes+1)
-
-	individual.Fitness = fitness
-
-	return fitness
 }

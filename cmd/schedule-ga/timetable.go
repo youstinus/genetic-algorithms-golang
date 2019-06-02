@@ -27,9 +27,9 @@ func createTimeTable() {
  * @param roomName
  * @param capacity
  */
-func (t *TimeTable) AddRoom(roomId int, roomName string, capacity int) {
-	t.Rooms[roomId] = Room{
-		RoomID:   roomId,
+func (t *TimeTable) AddRoom(roomID int, roomName string, capacity int) {
+	t.Rooms[roomID] = Room{
+		RoomID:   roomID,
 		RoomName: roomName,
 		Capacity: capacity,
 	}
@@ -178,7 +178,7 @@ func (t *TimeTable) getRoomsValues() []Room {
  *
  * @param individual
  */
-func (t *TimeTable) createClasses(individual Individual) {
+func (t *TimeTable) createClasses(individual *Individual) {
 	// Init classes
 	t.Classes = make([]Class, t.getNumClasses())
 
@@ -275,7 +275,7 @@ func (t *TimeTable) calcClashes() int {
  */
 func (t *TimeTable) getRoom(roomID int) Room {
 	if t.Rooms[roomID] == (Room{}) {
-		fmt.Println("Rooms doesn't contain key %d", roomID)
+		fmt.Println("Rooms doesn't contain key", roomID)
 	}
 	return t.Rooms[roomID]
 }
