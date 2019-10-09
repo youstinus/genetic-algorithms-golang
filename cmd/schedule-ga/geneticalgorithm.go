@@ -25,6 +25,7 @@ func createGeneticAlgorithm(populationSize int, mutationRate float64, crossoverR
 	return
 }
 
+// InitPopulation a
 /**
  * Initialize population
  *
@@ -38,6 +39,7 @@ func (ga *GeneticAlgorithm) InitPopulation(timeTable TimeTable) (population Popu
 	return
 }
 
+// IsTerminationConditionMet1 s
 /**
  * Check if population has met termination condition
  *
@@ -51,6 +53,7 @@ func (ga *GeneticAlgorithm) IsTerminationConditionMet1(generationsCount int, max
 	return generationsCount > maxGenerations
 }
 
+// IsTerminationConditionMet2 as
 /**
  * Check if population has met termination condition
  *
@@ -61,6 +64,7 @@ func (ga *GeneticAlgorithm) IsTerminationConditionMet2(population Population) bo
 	return math.Abs(population.GetFittest(0).Fitness-1.0) < 0.00001
 }
 
+// calcFitness s
 /**
  * Calculate individual's fitness value
  *
@@ -83,6 +87,7 @@ func calcFitness(individual *Individual, timeTable TimeTable) float64 {
 	return fitness
 }
 
+// EvalPopulation s
 /**
  * Evaluate population
  *
@@ -90,7 +95,7 @@ func calcFitness(individual *Individual, timeTable TimeTable) float64 {
  * @param timetable
  */
 func (ga *GeneticAlgorithm) EvalPopulation(population *Population, timeTable TimeTable) {
-	var populationFitness float64 = 0
+	var populationFitness float64
 
 	// Loop over population evaluating individuals and summing population
 	// fitness
@@ -107,6 +112,7 @@ func (ga *GeneticAlgorithm) EvalPopulation(population *Population, timeTable Tim
 	population.PopulationFitness = populationFitness
 }
 
+// SelectParent s
 /**
  * Selects parent for crossover using tournament selection
  *
@@ -134,6 +140,7 @@ func (ga *GeneticAlgorithm) SelectParent(population Population) Individual {
 	return tournament.GetFittest(0)
 }
 
+// MutatePopulation as
 /**
  * Apply mutation to population
  *
@@ -175,8 +182,8 @@ func (ga *GeneticAlgorithm) MutatePopulation(population Population, timeTable Ti
 	return newPopulation
 }
 
-/**
- * Apply crossover to population
+// CrossoverPopulation asdasd
+/* Apply crossover to population
  *
  * @param population The population to apply crossover to
  * @return The new population

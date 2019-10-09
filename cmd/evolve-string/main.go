@@ -19,7 +19,7 @@ func main() {
 	start := time.Now()
 	rand.Seed(time.Now().UTC().UnixNano())
 
-	target := []rune("aš dar visiškai žalias ir nežinau ar man dar ilgesnį rašyt sakinį")
+	target := []rune("aš dar visiškai žalias ir nežinau ar man dar ilgesnį rašyt") // aš dar visiškai žalias ir nežinau ar man dar ilgesnį rašyt
 	population := createPopulation(target)
 
 	found := false
@@ -36,7 +36,6 @@ func main() {
 			pool := createPool(population, target, maxFitness)
 			population = naturalSelection(pool, population, target)
 		}
-
 	}
 	elapsed := time.Since(start)
 	fmt.Printf("\nTime taken: %s\n", elapsed)

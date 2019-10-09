@@ -19,6 +19,7 @@ func (a ByFitness) Len() int           { return len(a) }
 func (a ByFitness) Swap(i, j int)      { a[i], a[j] = a[j], a[i] }
 func (a ByFitness) Less(i, j int) bool { return a[i].Fitness > a[j].Fitness } // for desc order
 
+// createPopulationBySize s
 // creates the initial population
 func createPopulationBySize(size int) (population Population) {
 	population = Population{
@@ -28,6 +29,7 @@ func createPopulationBySize(size int) (population Population) {
 	return
 }
 
+// createPopulationByTimeTable s
 // creates the initial population
 func createPopulationByTimeTable(size int, timeTable TimeTable) (population Population) {
 	// Initial population
@@ -46,6 +48,7 @@ func createPopulationByTimeTable(size int, timeTable TimeTable) (population Popu
 	return
 }
 
+// GetFittest s
 /*
  * Find fittest individual in the population
  *
@@ -79,6 +82,7 @@ func (p *Population) GetFittest(offset int) Individual {
 	return p.Population[offset]
 }
 
+// shuffle s
 /**
  * Shuffles the population in-place
  *
@@ -88,12 +92,14 @@ func (p *Population) GetFittest(offset int) Individual {
 func (p *Population) shuffle() {
 	for i := len(p.Population) - 1; i > 0; i-- {
 		index := rand.Intn(i + 1)
-		a := p.Population[index]
+		/*a := p.Population[index]
 		p.Population[index] = p.Population[i]
-		p.Population[i] = a
+		p.Population[i] = a*/ // instead of this
+		p.Population[index], p.Population[i] = p.Population[i], p.Population[index]
 	}
 }
 
+// sortPopulation s
 func (p *Population) sortPopulation() {
 	sort.Sort(ByFitness(p.Population))
 }

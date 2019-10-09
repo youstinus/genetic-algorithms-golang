@@ -20,6 +20,7 @@ func createTimeTable() {
 
 }
 
+// AddRoom s
 /**
  * Add new room
  *
@@ -35,6 +36,7 @@ func (t *TimeTable) AddRoom(roomID int, roomName string, capacity int) {
 	}
 }
 
+// AddTimeSlot s
 /**
  * Add new timeslot
  *
@@ -48,6 +50,7 @@ func (t *TimeTable) AddTimeSlot(timeSlotID int, timeSlot string) {
 	}
 }
 
+// AddProfessor s
 /**
  * Add new professor
  *
@@ -61,6 +64,7 @@ func (t *TimeTable) AddProfessor(professorID int, professorName string) {
 	}
 }
 
+// AddModule s
 /**
  * Add new module
  *
@@ -78,6 +82,7 @@ func (t *TimeTable) AddModule(moduleID int, moduleCode string, module string, pr
 	}
 }
 
+// AddGroup s
 /**
  * Add new group
  *
@@ -164,6 +169,7 @@ func (t *TimeTable) getRoomsValues() []Room {
 	return v
 }
 
+// createClasses s
 /**
  * Create classes using individual's chromosome
  *
