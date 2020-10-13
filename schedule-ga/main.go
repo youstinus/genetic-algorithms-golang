@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"math/rand"
 )
 
 func main() {
@@ -100,6 +101,10 @@ func initializeTimetable() TimeTable {
 	timeTable.AddRoom(4, "C1", 20)
 	timeTable.AddRoom(5, "D1", 25)
 
+	for i := 0; i < 50; i++ {
+		timeTable.AddRoom(6+i, fmt.Sprintf("E%d", i), 10+i)
+	}
+
 	// Set up timeslots
 	timeTable.AddTimeSlot(1, "Mon 9:00 - 11:00")
 	timeTable.AddTimeSlot(2, "Mon 11:00 - 13:00")
@@ -128,6 +133,10 @@ func initializeTimetable() TimeTable {
 	timeTable.AddProfessor(3, "Dr R Williams")
 	timeTable.AddProfessor(4, "Mr A Thompson")
 
+	for i := 0; i < 20; i++ {
+		timeTable.AddProfessor(5+i, fmt.Sprintf("Professor%d", i))
+	}
+
 	// Set up modules and define the professors that teach them
 	timeTable.AddModule(1, "cs1", "Computer Science", []int{1, 2})
 	timeTable.AddModule(2, "en1", "English", []int{1, 3})
@@ -135,6 +144,12 @@ func initializeTimetable() TimeTable {
 	timeTable.AddModule(4, "ph1", "Physics", []int{3, 4})
 	timeTable.AddModule(5, "hi1", "History", []int{4})
 	timeTable.AddModule(6, "dr1", "Drama", []int{1, 4})
+
+	profsInts := [][]int{{1, 2}, {2, 3}, {10, 5}, {11, 12}, {22, 15, 16}, {23, 16}}
+
+	for i := 0; i < 20; i++ {
+		timeTable.AddModule(7+i, fmt.Sprintf("ModuleĮd", i), "Drama", profsInts[rand.Intn(len(profsInts))])
+	}
 
 	// Set up student groups and the modules they take.
 	timeTable.AddGroup(1, 10, []int{1, 3, 4})
@@ -147,5 +162,11 @@ func initializeTimetable() TimeTable {
 	timeTable.AddGroup(8, 18, []int{2, 6})
 	timeTable.AddGroup(9, 24, []int{1, 6})
 	timeTable.AddGroup(10, 25, []int{3, 4})
+
+	moduleInts := [][]int{{1, 2}, {2, 3}, {10, 5}, {11, 12}, {12, 15, 1}, {15, 14}}
+	for i := 0; i < 10; i++ {
+		timeTable.AddGroup(11+i, rand.Intn(15)+15, moduleInts[rand.Intn(len(moduleInts))])
+	}
+
 	return timeTable
 }
