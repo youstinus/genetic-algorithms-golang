@@ -19,7 +19,7 @@ func main() {
 	start := time.Now()
 	rand.Seed(time.Now().UTC().UnixNano())
 
-	target := []rune("aš dar visiškai žalias ir nežinau ar man dar ilgesnį rašyt") // aš dar visiškai žalias ir nežinau ar man dar ilgesnį rašyt
+	target := []rune("this is a simple string to test genetics")
 	population := createPopulation(target)
 
 	found := false
